@@ -1,0 +1,140 @@
+:root{
+  --bg:#f7f7f8;
+  --panel:#ffffff;
+  --border:#e6e6e8;
+  --text:#111213;
+  --muted:#8b8d94;
+  --accent:#10a37f;
+  --shadow:0 10px 30px rgba(0,0,0,.06);
+  --radius:12px;
+}
+
+/* DARK THEME */
+:root[data-theme="dark"]{
+  --bg:#0b0c0f;
+  --panel:#111318;
+  --border:#1e222b;
+  --text:#e9eaee;
+  --muted:#9aa1ab;
+  --accent:#10a37f;
+  --shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+*{ box-sizing:border-box; scrollbar-width: thin; scrollbar-color: transparent transparent; }
+*::-webkit-scrollbar{ width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb{ background: transparent; border-radius:6px; }
+*::-webkit-scrollbar-track{ background:transparent; }
+
+.page{ height:100vh; display:flex; flex-direction:column; background:var(--bg); color:var(--text); }
+
+/* HEADER */
+.header{
+  display:grid; grid-template-columns: 1fr 1fr 1fr; align-items:center;
+  gap:12px; padding:12px 16px; border-bottom:1px solid var(--border);
+  background:var(--bg); position:sticky; top:0; z-index:10;
+}
+.left{ display:flex; gap:8px; align-items:center; }
+.center{ display:flex; justify-content:center; }
+.right{ display:flex; gap:8px; align-items:center; justify-content:flex-end; }
+
+.primaryBtn{
+  display:inline-flex; align-items:center; gap:8px;
+  height:36px; padding:0 14px;
+  background:var(--accent); color:#fff; border:1px solid var(--accent);
+  border-radius:10px; cursor:pointer; font-size:14px;
+}
+.primaryBtn:hover{ filter:brightness(0.95); }
+.iconBtn{
+  display:inline-flex; align-items:center; gap:6px;
+  height:36px; padding:0 10px; border:1px solid var(--border);
+  background:var(--panel); color:var(--text);
+  border-radius:10px; cursor:pointer;
+}
+.iconBtn:hover{ background-color:rgba(0,0,0,.03); }
+.btnText{ font-size:12px; }
+.disabled{ opacity:.7; cursor:not-allowed; }
+
+/* EMPTY STATE */
+.emptyWrap{
+  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:16px; padding:24px; text-align:center;
+}
+.emptyTitle{ font-weight:700; font-size:22px; }
+.emptyText{ color:var(--muted); max-width:560px; }
+
+/* SVG illustration */
+.illustration{ width:min(520px, 90vw); }
+.svg{ width:100%; height:auto; display:block; }
+.cloud{
+  fill: color-mix(in oklab, var(--panel), black 6%);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+.folder{
+  fill: var(--panel);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+.arrowGroup{ animation: float 2.2s ease-in-out infinite; transform-origin: 110px 84px; }
+.arrow{
+  stroke: var(--accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.arrowHead{
+  stroke: var(--accent);
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* SPLIT LAYOUT */
+.split{
+  flex:1; display:grid; grid-template-columns: 1fr 1fr; gap:12px;
+  padding:12px; min-height:0;
+}
+.previewPane, .textPane{
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:12px; min-height:0; display:flex; flex-direction:column; overflow:hidden;
+}
+
+/* IMAGE VIEWER */
+.viewer{ display:flex; flex-direction:column; min-height:0; flex:1; }
+.stage{
+  position:relative; flex:1; display:grid; place-items:center;
+  background:color-mix(in oklab, var(--panel), black 4%);
+}
+.image{ max-width:100%; max-height:100%; object-fit:contain; display:block; }
+.noPreview{ flex:1; display:grid; place-items:center; color:var(--muted); }
+
+/* TEXT SIDE */
+.textPane{ min-height:0; }
+.textArea{
+  flex:1; width:100%; resize:none; border:none; outline:none;
+  padding:16px; font-size:16px; line-height:1.5;
+  background:var(--panel); color:var(--text); overflow:auto;
+}
+.bottomBar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:10px; border-top:1px solid var(--border); background:var(--panel);
+}
+.ratingGroup{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.muted{ color:var(--muted); font-size:13px; }
+.rateBtn{
+  min-width:34px; height:34px; padding:0 10px;
+  background:var(--panel); border:1px solid var(--border);
+  border-radius:10px; cursor:pointer; font-size:14px; color:var(--text);
+}
+.rateBtn:hover{ background-color:rgba(0,0,0,.03); }
+.rateActive{ border-color:var(--accent); box-shadow:0 0 0 2px color-mix(in oklab, var(--accent), transparent 80%) inset; }
+.downloadGroup{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+
+@media (max-width: 900px){
+  .split{ grid-template-columns: 1fr; }
+}
